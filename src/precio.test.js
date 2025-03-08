@@ -1,4 +1,11 @@
+import { calcularSubtotal } from "./precio.js";
 import { aplicarDescuento } from "./precio.js";
+
+describe("Cálculo del subtotal", () => {
+    it("debería calcular correctamente el subtotal", () => {
+      expect(calcularSubtotal(2, 50)).toBe(100);
+    });
+  });
 
 describe("Aplicación de descuentos", () => {
   it("debería aplicar 3% de descuento si el total es mayor a $1000", () => {
@@ -9,3 +16,4 @@ describe("Aplicación de descuentos", () => {
     expect(aplicarDescuento(31000)).toBeCloseTo(26350);
   });
 });
+
