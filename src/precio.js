@@ -1,3 +1,7 @@
+export function calcularSubtotal(cantidad, precioUnitario) {
+    return cantidad * precioUnitario;
+}
+
 export function aplicarDescuento(total) {
     const descuentos = [
         { umbral: 30000, tasa: 0.15 },
