@@ -1,5 +1,6 @@
 import { calcularSubtotal } from "./precio.js";
 import { aplicarDescuento } from "./precio.js";
+import { aplicarImpuesto } from "./precio.js";
 
 describe("Cálculo del subtotal", () => {
     it("debería calcular correctamente el subtotal", () => {
@@ -17,3 +18,12 @@ describe("Aplicación de descuentos", () => {
   });
 });
 
+describe("Aplicación de impuestos", () => {
+    it("debería aplicar 8.25% si el estado es California", () => {
+      expect(aplicarImpuesto(100, "CA")).toBeCloseTo(108.25);
+    });
+  
+    it("debería aplicar 6.25% si el estado es Texas", () => {
+      expect(aplicarImpuesto(100, "TX")).toBeCloseTo(106.25);
+    });
+  });

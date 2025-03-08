@@ -13,3 +13,8 @@ export function aplicarDescuento(total) {
     const descuento = descuentos.find(d => total >= d.umbral)?.tasa || 0;
     return total * (1 - descuento);
 }
+
+export function aplicarImpuesto(total, estado) {
+    const impuestos = { UT: 0.0665, NV: 0.08, TX: 0.0625, AL: 0.04, CA: 0.0825 };
+    return total * (1 + (impuestos[estado] || 0));
+}
