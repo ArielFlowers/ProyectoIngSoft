@@ -18,3 +18,9 @@ export function aplicarImpuesto(total, estado) {
     const impuestos = { UT: 0.0665, NV: 0.08, TX: 0.0625, AL: 0.04, CA: 0.0825 };
     return total * (1 + (impuestos[estado] || 0));
 }
+
+export function calcularPrecioFinal(cantidad, precioUnitario, estado) {
+    const subtotal = calcularSubtotal(cantidad, precioUnitario);
+    const conDescuento = aplicarDescuento(subtotal);
+    return aplicarImpuesto(conDescuento, estado);
+}
