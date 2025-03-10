@@ -1,19 +1,36 @@
 <!DOCTYPE html>
-<html xml:lang="es">
-  <head>
-    <title>Sumador</title>
-  </head>
-  <body>
-    <h1>Sumador</h1>
-    <form id="sumar-form">
-      <label for="primer-numero">Primer número:</label>
-      <input type="number" id="primer-numero" />
-      <label for="segundo-numero">Segundo número:</label>
-      <input type="number" id="segundo-numero" />
-      <input type="submit" value="Sumar" id="sumar-button" />
-    </form>
-    <div id="resultado-div"></div>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Precio Final</title>
+</head>
+<body>
+    <h1>Calculadora de Precio Final</h1>
 
-    <script type="module" src="./src/presenter.js"></script>
-  </body>
+    <!-- Inputs para cantidad, precio y estado -->
+    <div>
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" />
+    </div>
+    <div>
+        <label for="precio">Precio Unitario:</label>
+        <input type="number" id="precio" />
+    </div>
+    <div>
+        <label for="estado">Estado:</label>
+        <select id="estado">
+            <option value="CA">California</option>
+            <option value="TX">Texas</option>
+            <!-- Agregar otros estados si es necesario -->
+        </select>
+    </div>
+    <button id="calcular">Calcular Precio Final</button>
+
+    <!-- Área para mostrar el resultado -->
+    <h2 id="resultado"></h2>
+
+    <!-- Cargar los archivos JS -->
+    <script type="module" src="./src/precio.js"></script> 
+<script type="module" src="./src/presenter.js"></script>
 </html>
