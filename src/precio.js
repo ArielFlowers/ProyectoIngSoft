@@ -31,3 +31,19 @@
         if (!["UT", "NV", "TX", "AL", "CA"].includes(estado)) return "Estado no válido";
         return "Entrada válida";
     }
+
+    export function aplicarCategoria(total, categoria) {
+        const categorias = {
+            Alimentos: { descuento: 0.02, impuesto: 0 },
+            Bebidas_alcoholicas: { descuento: 0, impuesto: 0.07 },
+            Material_de_escritorio: { descuento: 0.015, impuesto: 0 },
+            Muebles: { descuento: 0, impuesto: 0.03 },
+            Electronicos: { descuento: 0.01, impuesto: 0.04 },
+            Vestimenta: { descuento: 0, impuesto: 0.02 },
+            Varios: { descuento: 0, impuesto: 0 }
+        };
+        const categoriaSeleccionada = categorias[categoria] || {};
+        const totalConDescuento = total * (1 - categoriaSeleccionada.descuento);
+        return totalConDescuento * (1 + categoriaSeleccionada.impuesto);
+    }
+    
