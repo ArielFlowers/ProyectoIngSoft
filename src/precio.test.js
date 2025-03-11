@@ -1,4 +1,4 @@
-import { calcularSubtotal, aplicarDescuento, aplicarImpuesto, calcularPrecioFinal, validarEntrada, aplicarCategoria, aplicarImpuestoCategoria } from "./precio.js";
+import { calcularSubtotal, aplicarDescuento, aplicarImpuesto, calcularPrecioFinal, validarEntrada, aplicarCategoria, aplicarImpuestoCategoria, calcularEnvio } from "./precio.js";
 
 describe("Cálculo del subtotal", () => {
     it("debería calcular correctamente el subtotal", () => {
@@ -67,5 +67,15 @@ describe("Validación de entradas", () => {
   
     it("no debería aplicar impuesto para la categoría Varios", () => {
       expect(aplicarImpuestoCategoria(100, "Varios")).toBe(100);
+    });
+  });
+
+  describe("Cálculo del costo de envío", () => {
+    it("debería calcular $3.5 si el peso volumétrico está entre 11 y 20", () => {
+      expect(calcularEnvio(15)).toBe(3.5);
+    });
+  
+    it("debería calcular $0 si el peso es menor o igual a 10", () => {
+      expect(calcularEnvio(5)).toBe(0);
     });
   });
