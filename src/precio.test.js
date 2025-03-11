@@ -1,4 +1,4 @@
-import { calcularSubtotal, aplicarDescuento, aplicarImpuesto, calcularPrecioFinal, validarEntrada, aplicarCategoria } from "./precio.js";
+import { calcularSubtotal, aplicarDescuento, aplicarImpuesto, calcularPrecioFinal, validarEntrada, aplicarCategoria, aplicarImpuestoCategoria } from "./precio.js";
 
 describe("Cálculo del subtotal", () => {
     it("debería calcular correctamente el subtotal", () => {
@@ -57,5 +57,15 @@ describe("Validación de entradas", () => {
   
     it("debería aplicar 0% de impuesto adicional si la categoría es Varios", () => {
       expect(aplicarCategoria(100, "Varios")).toBe(100);
+    });
+  });
+
+  describe("Impuestos adicionales por categoría", () => {
+    it("debería aplicar 7% de impuesto si la categoría es Bebidas alcohólicas", () => {
+      expect(aplicarImpuestoCategoria(100, "BebidasAlcoholicas")).toBe(107);
+    });
+  
+    it("no debería aplicar impuesto para la categoría Varios", () => {
+      expect(aplicarImpuestoCategoria(100, "Varios")).toBe(100);
     });
   });

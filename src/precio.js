@@ -46,4 +46,18 @@
         const totalConDescuento = total * (1 - categoriaSeleccionada.descuento);
         return totalConDescuento * (1 + categoriaSeleccionada.impuesto);
     }
-    
+
+    export function aplicarImpuestoCategoria(total, categoria) {
+        const impuestosCategoria = {
+          Alimentos: 0,
+          BebidasAlcoholicas: 0.07,
+          "Material de escritorio": 0,
+          Muebles: 0.03,
+          Electrónicos: 0.04,
+          Vestimenta: 0.02,
+          Varios: 0
+        };
+        const impuesto = impuestosCategoria[categoria] || 0;
+        return total * (1 + impuesto);
+      }
+      
