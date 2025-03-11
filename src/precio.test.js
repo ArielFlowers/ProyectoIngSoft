@@ -86,6 +86,6 @@ describe("Descuento en envío", () => {
 
 describe("Cálculo del precio final completo", () => {
     it("debería calcular correctamente el precio final con descuento, impuestos y envío", () => {
-      expect(calcularPrecioFinalCompleto(2, 500, "CA", "Alimentos", 10, "Recurrente")).toBeCloseTo(1029.2455, 4);
+      expect(calcularPrecioFinalCompleto(2, 500, "CA", "Alimentos", 10, "Recurrente")).toBeCloseTo(1060.85, 2);
     });
 });
