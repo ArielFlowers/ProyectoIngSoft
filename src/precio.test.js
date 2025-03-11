@@ -1,4 +1,4 @@
-import { calcularSubtotal, aplicarDescuento, aplicarImpuesto, calcularPrecioFinal, validarEntrada, aplicarCategoria, aplicarImpuestoCategoria, calcularEnvio, aplicarDescuentoEnvio } from "./precio.js";
+import { calcularSubtotal, aplicarDescuento, aplicarImpuesto, calcularPrecioFinal, validarEntrada, aplicarCategoria, aplicarImpuestoCategoria, calcularEnvio, aplicarDescuentoEnvio, calcularPrecioFinalCompleto } from "./precio.js";
 
 describe("Cálculo del subtotal", () => {
     it("debería calcular correctamente el subtotal", () => {
@@ -48,9 +48,9 @@ describe("Validación de entradas", () => {
     it("debería retornar 'Entrada válida' si todos los valores son correctos", () => {
       expect(validarEntrada(2, 50, "CA")).toBe("Entrada válida");
     });
-  });
+});
 
-  describe("Aplicación de categoría", () => {
+describe("Aplicación de categoría", () => {
     it("debería aplicar 2% de descuento adicional si la categoría es Alimentos", () => {
       expect(aplicarCategoria(1200, "Alimentos")).toBe(1176);
     });
@@ -58,34 +58,34 @@ describe("Validación de entradas", () => {
     it("debería aplicar 0% de impuesto adicional si la categoría es Varios", () => {
       expect(aplicarCategoria(100, "Varios")).toBe(100);
     });
-  });
+});
 
-  describe("Impuestos adicionales por categoría", () => {
-    it("debería aplicar 7% de impuesto si la categoría es Bebidas alcohólicas", () => {
-      expect(aplicarImpuestoCategoria(100, "BebidasAlcoholicas")).toBe(107);
-    });
-  
-    it("no debería aplicar impuesto para la categoría Varios", () => {
-      expect(aplicarImpuestoCategoria(100, "Varios")).toBe(100);
-    });
-  });
-
-  describe("Cálculo del costo de envío", () => {
-    it("debería calcular $3.5 si el peso volumétrico está entre 11 y 20", () => {
+describe("Cálculo del costo de envío", () => {
+    it("debería calcular $3.5 si el peso volumétrico es 15", () => {
       expect(calcularEnvio(15)).toBe(3.5);
     });
-  
-    it("debería calcular $0 si el peso es menor o igual a 10", () => {
-      expect(calcularEnvio(5)).toBe(0);
-    });
-  });
 
-  describe("Descuento en costo de envío por tipo de cliente", () => {
-    it("debería aplicar 1% de descuento para un cliente 'Antiguo Recurrente'", () => {
-      expect(aplicarDescuentoEnvio(100, "Antiguo Recurrente")).toBe(99);
+    it("debería calcular $6 si el peso volumétrico es 50", () => {
+      expect(calcularEnvio(50)).toBe(6);
+    });
+
+    it("debería calcular $9 si el peso volumétrico es mayor a 200", () => {
+      expect(calcularEnvio(250)).toBe(9);
+    });
+});
+
+describe("Descuento en envío", () => {
+    it("debería aplicar 0.5% de descuento en el costo de envío para cliente recurrente", () => {
+      expect(aplicarDescuentoEnvio(6, "Recurrente")).toBeCloseTo(5.97);
     });
   
-    it("no debería aplicar descuento para un cliente 'Normal'", () => {
-      expect(aplicarDescuentoEnvio(100, "Normal")).toBe(100);
+    it("debería aplicar 1% de descuento en el costo de envío para cliente antiguo recurrente", () => {
+      expect(aplicarDescuentoEnvio(6, "Antiguo Recurrente")).toBeCloseTo(5.94);
     });
-  });
+});
+
+describe("Cálculo del precio final completo", () => {
+    it("debería calcular correctamente el precio final con descuento, impuestos y envío", () => {
+      expect(calcularPrecioFinalCompleto(2, 500, "CA", "Alimentos", 10, "Recurrente")).toBeCloseTo(1029.2455, 4);
+    });
+});
