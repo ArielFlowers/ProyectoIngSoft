@@ -70,3 +70,15 @@
         if (peso <= 200) return 8;
         return 9;
       }
+
+      export function aplicarDescuentoEnvio(costoEnvio, tipoCliente) {
+        const descuentosCliente = {
+          Normal: 0,
+          Recurrente: 0.005,
+          "Antiguo Recurrente": 0.01,
+          Especial: 0.015
+        };
+        const descuento = descuentosCliente[tipoCliente] || 0;
+        return costoEnvio * (1 - descuento);
+      }
+      

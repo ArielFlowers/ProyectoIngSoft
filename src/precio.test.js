@@ -1,4 +1,4 @@
-import { calcularSubtotal, aplicarDescuento, aplicarImpuesto, calcularPrecioFinal, validarEntrada, aplicarCategoria, aplicarImpuestoCategoria, calcularEnvio } from "./precio.js";
+import { calcularSubtotal, aplicarDescuento, aplicarImpuesto, calcularPrecioFinal, validarEntrada, aplicarCategoria, aplicarImpuestoCategoria, calcularEnvio, aplicarDescuentoEnvio } from "./precio.js";
 
 describe("Cálculo del subtotal", () => {
     it("debería calcular correctamente el subtotal", () => {
@@ -77,5 +77,15 @@ describe("Validación de entradas", () => {
   
     it("debería calcular $0 si el peso es menor o igual a 10", () => {
       expect(calcularEnvio(5)).toBe(0);
+    });
+  });
+
+  describe("Descuento en costo de envío por tipo de cliente", () => {
+    it("debería aplicar 1% de descuento para un cliente 'Antiguo Recurrente'", () => {
+      expect(aplicarDescuentoEnvio(100, "Antiguo Recurrente")).toBe(99);
+    });
+  
+    it("no debería aplicar descuento para un cliente 'Normal'", () => {
+      expect(aplicarDescuentoEnvio(100, "Normal")).toBe(100);
     });
   });
